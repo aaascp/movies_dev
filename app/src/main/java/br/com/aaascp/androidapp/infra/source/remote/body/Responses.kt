@@ -1,5 +1,5 @@
 package br.com.aaascp.androidapp.infra.source.remote.body
 
-import br.com.aaascp.androidapp.infra.source.remote.body.movie.MovieResponseBody
+import br.com.aaascp.androidapp.infra.source.remote.body.movie.MovieUpcomingResponseBody
 
-typealias MovieResponse = DataResponseBody<List<MovieResponseBody>>
+typealias MovieUpcomingResponse = ResultResponseBody<List<MovieUpcomingResponseBody>>

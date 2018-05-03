@@ -1,16 +1,14 @@
 package br.com.aaascp.androidapp.infra.source.local.dao.movie
 
-import android.arch.paging.DataSource
-import br.com.aaascp.androidapp.infra.source.local.entity.Movie
+import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming
+import io.reactivex.Maybe
 
 interface MovieLocalDataSource {
 
-    fun getAll(): DataSource.Factory<Int, Movie>
+    fun getUpcoming(): Maybe<List<MovieUpcoming>>
 
-    fun save(areas: List<Movie>)
+    fun saveUpcoming(upcomingMoviesList: MovieUpcoming)
 
-    fun removeAll()
-
-    fun getNextIndex(): Int
+    fun removeAllUpcoming()
 
 }
