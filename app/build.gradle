@@ -1,0 +1,96 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "br.com.aaascp.androidapp"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
+        buildConfigField "String", "API_URL", "\"https://api.themoviedb.org/\""
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        production {
+            resValue "string", "app_name", "Movies"
+
+            multiDexEnabled false
+        }
+        mock {
+            resValue "string", "app_name", "Movies Test"
+
+            multiDexEnabled true
+            applicationIdSuffix = ".mock"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+
+    //Support Libraries
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
+    implementation "com.android.support:cardview-v7:${rootProject.ext.supportLibVersion}"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:${rootProject.ext.androidComponentsVersion}"
+    kapt "android.arch.lifecycle:compiler:${rootProject.ext.androidComponentsVersion}"
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:${rootProject.ext.roomVersion}"
+    kapt "android.arch.persistence.room:compiler:${rootProject.ext.roomVersion}"
+
+    //Pagination
+    implementation "android.arch.paging:runtime:1.0.0-rc1"
+
+    // Retrofit & OkHttp
+    implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofitVersion}"
+    implementation "com.squareup.retrofit2:retrofit-mock:${rootProject.ext.retrofitVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.8.1"
+
+    //Dagger
+    implementation "com.google.dagger:dagger:${rootProject.ext.daggerVersion}"
+    implementation "com.google.dagger:dagger-android:${rootProject.ext.daggerVersion}"
+    implementation "com.google.dagger:dagger-android-support:${rootProject.ext.daggerVersion}"
+    kapt "com.google.dagger:dagger-compiler:${rootProject.ext.daggerVersion}"
+    kapt "com.google.dagger:dagger-android-processor:${rootProject.ext.daggerVersion}"
+
+
+    //RxAndroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
+}
