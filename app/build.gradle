@@ -9,7 +9,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "br.com.aaascp.androidapp"
+        applicationId "br.com.aaascp.moviesapp"
         minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
@@ -22,9 +22,9 @@ android {
             }
         }
 
-        buildConfigField "String", "API_URL", "\"https://api.themoviedb.org/\""
+        buildConfigField "String", "API_URL", "\"https://api.themoviedb.org\""
         buildConfigField "String", "API_KEY_NAME", "\"api_key\""
-        buildConfigField "String", "API_KEY", "\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYTlkMDViMjA4YjljYzE0MzEzZTQ0OGEzYjM3YzNiMSIsInN1YiI6IjVhZGU3NjJjYzNhMzY4NmFkNDAwMDc3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FKkg3lxMEtx6hzbAGT-7EyfRQ_hbl1RcVEbPavVRw5c\""
+        buildConfigField "String", "API_KEY", "\"ca9d05b208b9cc14313e448a3b37c3b1\""
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -73,6 +73,7 @@ dependencies {
 
     // Room
     implementation "android.arch.persistence.room:runtime:${rootProject.ext.roomVersion}"
+    implementation "android.arch.persistence.room:rxjava2:${rootProject.ext.roomVersion}"
     kapt "android.arch.persistence.room:compiler:${rootProject.ext.roomVersion}"
 
     //Pagination
@@ -83,6 +84,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofitVersion}"
     implementation "com.squareup.retrofit2:retrofit-mock:${rootProject.ext.retrofitVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:3.8.1"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.ext.retrofitVersion}"
 
     //Dagger
     implementation "com.google.dagger:dagger:${rootProject.ext.daggerVersion}"
@@ -94,7 +96,5 @@ dependencies {
     //RxAndroid
     implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
     implementation "io.reactivex.rxjava2:rxjava:2.1.13"
-    implementation "com.squareup.retrofit2:adapter-rxjava:2.4.0"
-    implementation "android.arch.persistence.room:rxjava2:1.1.0-rc1"
 
 }

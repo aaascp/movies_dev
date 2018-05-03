@@ -7,9 +7,9 @@ import retrofit2.http.Query
 
 interface MovieEndpoint {
 
-    @GET("/movie/upcoming")
+    @GET("/3/movie/upcoming")
     fun getUpcoming(
-            @Query("page") page: Int  = 0,
+            @Query("page") page: Int  = 1,
             @Query("region") region: String = "BR"
     ): Single<MovieUpcomingResponse>
 }
