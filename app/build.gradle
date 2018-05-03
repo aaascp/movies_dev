@@ -23,6 +23,8 @@ android {
         }
 
         buildConfigField "String", "API_URL", "\"https://api.themoviedb.org/\""
+        buildConfigField "String", "API_KEY_NAME", "\"api_key\""
+        buildConfigField "String", "API_KEY", "\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYTlkMDViMjA4YjljYzE0MzEzZTQ0OGEzYjM3YzNiMSIsInN1YiI6IjVhZGU3NjJjYzNhMzY4NmFkNDAwMDc3YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.FKkg3lxMEtx6hzbAGT-7EyfRQ_hbl1RcVEbPavVRw5c\""
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -89,8 +91,10 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:${rootProject.ext.daggerVersion}"
     kapt "com.google.dagger:dagger-android-processor:${rootProject.ext.daggerVersion}"
 
-
     //RxAndroid
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
+    implementation "io.reactivex.rxjava2:rxjava:2.1.13"
+    implementation "com.squareup.retrofit2:adapter-rxjava:2.4.0"
+    implementation "android.arch.persistence.room:rxjava2:1.1.0-rc1"
+
 }
