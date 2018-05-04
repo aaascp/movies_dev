@@ -4,44 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_marginBottom="4dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginTop="4dp">
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackground">
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="72dp"
+            android:layout_height="108dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="@dimen/extra_large_text_size"
+            android:textSize="@dimen/large_text_size"
             android:textStyle="bold"
+            android:layout_marginLeft="8dp"
             app:layout_constraintBottom_toTopOf="@+id/releaseDate"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/image"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/image"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="Titulo" />
+            tools:text="Deadpool 2"
+            android:layout_marginStart="8dp" />
 
         <TextView
             android:id="@+id/releaseDate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:maxLines="2"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textSize="@dimen/large_text_size"
-            app:layout_constraintTop_toBottomOf="@+id/title"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:textSize="@dimen/regular_text_size"
+            app:layout_constraintLeft_toLeftOf="@+id/title"
             app:layout_constraintRight_toRightOf="parent"
-            tools:text="Data de lançamento" />
+            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintBottom_toBottomOf="@+id/image"
+            tools:text="23 de abril" />
 
     </android.support.constraint.ConstraintLayout>
 
