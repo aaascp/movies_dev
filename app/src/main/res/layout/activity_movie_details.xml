@@ -35,6 +35,17 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
+        <TextView
+            android:id="@+id/state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/regular_spacing"
+            android:textSize="@dimen/large_text_size"
+            android:visibility="gone"
+            tools:text="Carregando..."
+            tools:visibility="visible" />
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView

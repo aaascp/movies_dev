@@ -5,7 +5,7 @@
     android:id="@+id/popUp"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@android:color/holo_blue_dark">
+    android:background="@android:color/black">
 
     <TextView
         android:id="@+id/popUpMessage"

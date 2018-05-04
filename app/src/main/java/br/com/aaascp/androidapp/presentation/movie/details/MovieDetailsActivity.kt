@@ -7,8 +7,7 @@ import br.com.aaascp.androidapp.R
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import android.util.Log
-import br.com.aaascp.androidapp.infra.repository.NetworkState
+import android.view.View
 import br.com.aaascp.androidapp.infra.repository.ResourceState
 import br.com.aaascp.androidapp.infra.source.local.entity.Genre
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails
@@ -43,6 +42,10 @@ class MoviesDetailsActivity : AppCompatActivity() {
 
         model = getViewModel()
 
+        toolbar.setNavigationOnClickListener{
+            onBackPressed()
+        }
+
         init(id)
     }
 
@@ -60,15 +63,12 @@ class MoviesDetailsActivity : AppCompatActivity() {
                 Observer {
                     if (it != null) {
                         bindDetails(it)
-                    } else {
-                        bindError()
                     }
-
                 })
 
 
         model.state.observe(this, Observer {
-            //            showState(it)
+            showState(it)
         })
     }
 
@@ -101,19 +101,30 @@ class MoviesDetailsActivity : AppCompatActivity() {
     }
 
     private fun bindGenres(genres: List<Genre>) {
-        movieGenres.text = genres.joinToString(", "){it.name}
+        movieGenres.text = genres.joinToString(", ") { it.name }
+    }
+
+    private fun bindLoading() {
+        state.visibility = View.GONE
+        state.text = getString(R.string.item_loading)
     }
 
     private fun bindError() {
-
+        state.visibility = View.GONE
+        state.text = getString(R.string.item_error)
     }
 
-//    private fun showState(state: ResourceState?) {
-//        when (state) {
-//            ResourceState.LOADING -> list.adapter = loadingAdapter
-//            ResourceState.EMPTY -> list.adapter = emptyAdapter
-//            ResourceState.ERROR -> list.adapter = errorAdapter
-//            ResourceState.FILLED -> list.adapter = listAdapter
-//        }
-//    }
+    private fun bindSuccess() {
+        state.visibility = View.GONE
+    }
+
+    private fun showState(state: ResourceState?) {
+        when (state) {
+            ResourceState.LOADING -> bindLoading()
+            ResourceState.ERROR -> bindError()
+            else -> {
+                bindSuccess()
+            }
+        }
+    }
 }

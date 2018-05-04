@@ -9,5 +9,8 @@
     <string name="list_loading">Carregando…</string>
     <string name="list_error">Erro ao carregar os dados</string>
 
+    <string name="item_loading">Carregando…</string>
+    <string name="item_error">Erro ao carregar os dados</string>
+
     <string name="upcoming_movie_release_date">Lançamento: %1$s</string>
 </resources>
