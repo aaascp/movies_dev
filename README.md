@@ -25,3 +25,5 @@ A aplicação não está funcionando redonda do jeito que gostaria, pois, como j
 na arquitetura MVVM. Porém mesmo apesar da dificuldade eu decidi fazer dessa maneira, já que um projeto realizado
  na arquitetura  onde tenho mais experiência pode ser encontrado no link já citado anteriormente.
 
+# Download da aplicação
+O aplicativo pode ser baixado no celular através [desse link](https://drive.google.com/file/d/1_ip3PpC2FonN9cIo8BHgNgAeM11ufxhU/view?usp=sharing).
