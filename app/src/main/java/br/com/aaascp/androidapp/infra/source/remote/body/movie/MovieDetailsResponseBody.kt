@@ -2,14 +2,14 @@ package br.com.aaascp.androidapp.infra.source.remote.body.movie
 
 import com.google.gson.annotations.SerializedName
 
-data class Genre(
+data class GenreResponseBody(
         val id: Int,
         val name: String
-);
+)
 
 data class MovieDetailsResponseBody(
         val id: Int,
-        val genres: List<Genre>,
+        val genres: List<GenreResponseBody>,
         val title: String,
         val overview: String,
         @SerializedName("poster_path")

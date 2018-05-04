@@ -6,7 +6,7 @@ import br.com.aaascp.androidapp.di.module.ApplicationModule
 import br.com.aaascp.androidapp.di.module.infra.DatabaseModule
 import br.com.aaascp.androidapp.di.module.infra.EndpointModule
 import br.com.aaascp.androidapp.infra.repository.movie.MovieRepository
-import br.com.aaascp.androidapp.presentation.movie.UpcomingMoviesListViewModel
+import br.com.aaascp.androidapp.presentation.movie.upcoming.UpcomingMoviesListViewModel
 import dagger.Component
 import java.util.concurrent.Executor
 import javax.inject.Singleton
