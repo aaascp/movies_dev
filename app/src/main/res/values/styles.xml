@@ -5,6 +5,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/dark_grey</item>
+        <item name="android:textColor">@color/light_grey</item>
     </style>
 
     <style name="ExpandedTitleTextAppearance" parent="AppTheme">

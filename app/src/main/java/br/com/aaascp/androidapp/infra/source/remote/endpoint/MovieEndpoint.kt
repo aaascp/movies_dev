@@ -18,6 +18,6 @@ interface MovieEndpoint {
     @GET("/3/movie/{id}")
     fun getDetails(
             @Path("id") id: Int,
-            @Query("region") region: String = "BR"
+            @Query("region") language: String = "pt-BR"
     ): Single<MovieDetailsResponse>
 }
