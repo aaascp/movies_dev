@@ -7,7 +7,7 @@ class MovieAdapter {
     companion object {
         fun adapt(movie: List<MovieUpcomingResponseBody>): List<MovieUpcoming> {
             return movie.map {
-                MovieUpcoming(it.id, it.title, it.releaseDate, it.posterPath)
+                MovieUpcoming(it.id, it.title, it.posterPath, it.releaseDate)
             }
         }
     }

@@ -1,8 +1,8 @@
 package br.com.aaascp.androidapp.infra.repository.movie
 
+import br.com.aaascp.androidapp.infra.repository.Resource
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming
-import io.reactivex.Maybe
 
 interface MovieRepository {
-    fun getUpcomingList(): Maybe<List<MovieUpcoming>>
+    fun getUpcomingList(): Resource<List<MovieUpcoming>>
 }

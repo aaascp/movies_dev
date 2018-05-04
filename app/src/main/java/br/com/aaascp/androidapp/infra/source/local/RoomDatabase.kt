@@ -11,7 +11,7 @@ import javax.inject.Singleton
 @Database(
         entities = arrayOf(
                 MovieUpcoming::class),
-        version = 1)
+        version = 2)
 abstract class RoomDatabase : RoomDatabase(), AppDatabase {
 
     override fun runInTransaction(body: () -> Unit) {

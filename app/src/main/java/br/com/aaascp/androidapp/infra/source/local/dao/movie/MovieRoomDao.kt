@@ -5,13 +5,13 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming
-import io.reactivex.Maybe
+import io.reactivex.Flowable
 
 @Dao
 interface MovieRoomDao : MovieLocalDataSource {
 
     @Query("SELECT * from MovieUpcoming")
-    override fun getUpcoming(): Maybe<List<MovieUpcoming>>
+    override fun getUpcoming(): Flowable<List<MovieUpcoming>>
 
     @Insert(onConflict = REPLACE)
     override fun saveUpcoming(upcomingMoviesList: MovieUpcoming)

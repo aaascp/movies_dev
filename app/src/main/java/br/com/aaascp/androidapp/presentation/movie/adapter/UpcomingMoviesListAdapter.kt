@@ -7,10 +7,8 @@ import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming
 import br.com.aaascp.androidapp.presentation.ViewHolderBase
 
 
-class UpcomingMoviesListAdapter(
-        private val upcomingMoviesList: List<MovieUpcoming>
-) : RecyclerView.Adapter<ViewHolderBase<MovieUpcoming>>() {
-
+class UpcomingMoviesListAdapter : RecyclerView.Adapter<ViewHolderBase<MovieUpcoming>>() {
+    private val upcomingMoviesList = mutableListOf<MovieUpcoming>()
 
     override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -23,10 +21,17 @@ class UpcomingMoviesListAdapter(
             position: Int
     ) = holder.bind(upcomingMoviesList[position])
 
-
     override fun getItemViewType(position: Int) = LIST_TYPE
 
     override fun getItemCount(): Int = upcomingMoviesList.size
+
+    fun setItems(items: List<MovieUpcoming>?) {
+        items?.let {
+            upcomingMoviesList.clear()
+            upcomingMoviesList.addAll(items)
+            notifyDataSetChanged()
+        }
+    }
 
     companion object {
         private const val LIST_TYPE = R.layout.row_upcoming_movie_item
