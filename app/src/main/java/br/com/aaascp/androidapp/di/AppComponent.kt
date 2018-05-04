@@ -1,6 +1,5 @@
 package br.com.aaascp.androidapp.di
 
-import android.arch.paging.PagingRequestHelper
 import android.content.Context
 import br.com.aaascp.androidapp.di.module.ApplicationModule
 import br.com.aaascp.androidapp.di.module.infra.DatabaseModule
@@ -24,8 +23,6 @@ interface AppComponent {
     fun inject(upcomingMoviesListViewModel: UpcomingMoviesListViewModel)
 
     fun getExecutor(): Executor
-
-    fun getPagingRequestHelper(): PagingRequestHelper
 
     fun getApplicationContext(): Context
 }
