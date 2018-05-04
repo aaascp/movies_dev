@@ -81,9 +81,7 @@ class MovieWithLocalDataRepository @Inject constructor(
     ) {
         db.runInTransaction({
             db.movieDao().removeAllUpcoming()
-            upcomingMoviesList.map {
-                db.movieDao().saveUpcoming(it)
-            }
+            db.movieDao().saveUpcoming(upcomingMoviesList)
         })
     }
 
@@ -96,9 +94,8 @@ class MovieWithLocalDataRepository @Inject constructor(
     }
 
     private fun insertMovieGenresIntoDb(genres: List<Genre>) {
-        genres.map {
-            db.movieDao().saveDetailsGenre(it)
-        }
+        db.movieDao().saveDetailsGenre(genres)
+
     }
 }
 

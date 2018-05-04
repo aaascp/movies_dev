@@ -7,7 +7,7 @@ interface MovieLocalDataSource {
 
     fun getUpcoming(): Flowable<List<MovieUpcoming>>
 
-    fun saveUpcoming(upcomingMoviesList: MovieUpcoming)
+    fun saveUpcoming(upcomingMoviesList: List<MovieUpcoming>)
 
     fun removeAllUpcoming()
 
@@ -15,6 +15,6 @@ interface MovieLocalDataSource {
 
     fun saveDetails(movieDetails: MovieDetails)
 
-    fun saveDetailsGenre(movieGenre: Genre)
+    fun saveDetailsGenre(movieGenre: List<Genre>)
 
 }

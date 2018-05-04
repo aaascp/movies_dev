@@ -15,7 +15,7 @@ interface MovieRoomDao : MovieLocalDataSource {
     override fun getUpcoming(): Flowable<List<MovieUpcoming>>
 
     @Insert(onConflict = REPLACE)
-    override fun saveUpcoming(upcomingMoviesList: MovieUpcoming)
+    override fun saveUpcoming(upcomingMoviesList: List<MovieUpcoming>)
 
     @Query("DELETE FROM MovieUpcoming")
     override fun removeAllUpcoming()
@@ -28,5 +28,5 @@ interface MovieRoomDao : MovieLocalDataSource {
     override fun saveDetails(movieDetails: MovieDetails)
 
     @Insert(onConflict = REPLACE)
-    override fun saveDetailsGenre(movieGenre: Genre)
+    override fun saveDetailsGenre(movieGenre: List<Genre>)
 }
