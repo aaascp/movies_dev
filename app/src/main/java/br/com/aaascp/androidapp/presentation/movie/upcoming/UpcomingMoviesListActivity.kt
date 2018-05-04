@@ -1,4 +1,4 @@
-package br.com.aaascp.androidapp.presentation.movie
+package br.com.aaascp.androidapp.presentation.movie.upcoming
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import br.com.aaascp.androidapp.infra.repository.NetworkState
 import br.com.aaascp.androidapp.infra.repository.ResourceState
 import br.com.aaascp.androidapp.presentation.SingleRowStaticViewAdapter
-import br.com.aaascp.androidapp.presentation.movie.adapter.UpcomingMoviesListAdapter
+import br.com.aaascp.androidapp.presentation.movie.upcoming.adapter.UpcomingMoviesListAdapter
 
 import kotlinx.android.synthetic.main.activity_movie_list.*
 

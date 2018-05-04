@@ -1,4 +1,4 @@
-package br.com.aaascp.androidapp.presentation.movie
+package br.com.aaascp.androidapp.presentation.movie.upcoming
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel

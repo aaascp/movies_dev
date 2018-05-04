@@ -1,4 +1,4 @@
-package br.com.aaascp.androidapp.presentation.movie.adapter
+package br.com.aaascp.androidapp.presentation.movie.upcoming.adapter
 
 import android.view.LayoutInflater
 import android.view.View
