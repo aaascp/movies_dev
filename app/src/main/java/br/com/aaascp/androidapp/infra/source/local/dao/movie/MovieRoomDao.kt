@@ -22,8 +22,8 @@ interface MovieRoomDao : MovieLocalDataSource {
     @Query("DELETE FROM MovieUpcoming")
     override fun removeAllUpcoming()
 
-    @Query("SELECT * from MovieDetails")
-    override fun getDetails(): Flowable<MovieDetails>
+    @Query("SELECT * from MovieDetails WHERE id=:id")
+    override fun getDetails(id: Int): Flowable<MovieDetails>
 
     @Insert(onConflict = REPLACE)
     override fun saveDetails(movieDetails: MovieDetails)

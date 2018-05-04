@@ -13,7 +13,7 @@ interface MovieLocalDataSource {
 
     fun removeAllUpcoming()
 
-    fun getDetails(): Flowable<MovieDetails>
+    fun getDetails(id: Int): Flowable<MovieDetails>
 
     fun saveDetails(movieDetails: MovieDetails)
 

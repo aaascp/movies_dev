@@ -67,7 +67,7 @@ class MovieWithLocalDataRepository @Inject constructor(
 
         val movieDetails =
                 db.movieDao()
-                        .getDetails()
+                        .getDetails(id)
                         .subscribeOn(Schedulers.io())
 
         return Resource(
