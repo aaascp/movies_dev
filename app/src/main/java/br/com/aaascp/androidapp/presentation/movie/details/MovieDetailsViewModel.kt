@@ -22,12 +22,8 @@ class MovieDetailsViewModel : ViewModel() {
     val state = MutableLiveData<ResourceState>()
     val networkState = MutableLiveData<NetworkState>()
 
-    init {
-        getDetails()
-    }
-
-    fun getDetails() {
-        val result = repository.getUpcomingList()
+    fun getDetails(id: Int) {
+        val result = repository.getDetails(id)
         observeResource(result.value)
         observeState(result.state)
         observeNetworkState(result.networkState)

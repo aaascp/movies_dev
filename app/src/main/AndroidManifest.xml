@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".presentation.movie.details.MoviesDetailsActivity" />
     </application>
 
 </manifest>

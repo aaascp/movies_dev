@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import br.com.aaascp.androidapp.R
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
+import android.content.Intent
 import br.com.aaascp.androidapp.infra.repository.NetworkState
 import br.com.aaascp.androidapp.infra.repository.ResourceState
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails
@@ -18,14 +20,27 @@ class MoviesDetailsActivity : AppCompatActivity() {
 
     private lateinit var model: MovieDetailsViewModel
 
+    companion object {
+        private const val MOVIE_ID = "MOVIE_ID"
+
+        fun start(context: Context, id: Int) {
+
+            val intent = Intent(context, MoviesDetailsActivity::class.java)
+            intent.putExtra(MOVIE_ID, id)
+
+            context.startActivity(intent)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_movie_details)
+        val id = intent.extras.getInt(MOVIE_ID)
 
         model = getViewModel()
 
-        init()
+        init(id)
     }
 
     private fun getViewModel(): MovieDetailsViewModel {
@@ -34,8 +49,9 @@ class MoviesDetailsActivity : AppCompatActivity() {
                 .get(MovieDetailsViewModel::class.java)
     }
 
+    private fun init(id: Int) {
+        model.getDetails(id)
 
-    private fun init() {
         model.movieDetails.observe(
                 this,
                 Observer {

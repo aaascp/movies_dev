@@ -5,9 +5,11 @@ import br.com.aaascp.androidapp.infra.adapter.MovieAdapter
 import br.com.aaascp.androidapp.infra.repository.Resource
 import br.com.aaascp.androidapp.infra.repository.NetworkState
 import br.com.aaascp.androidapp.infra.source.local.AppDatabase
+import br.com.aaascp.androidapp.infra.source.local.entity.Genre
+import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming
+import br.com.aaascp.androidapp.infra.source.remote.body.movie.MovieDetailsResponseBody
 import br.com.aaascp.androidapp.infra.source.remote.endpoint.MovieEndpoint
-import br.com.aaascp.androidapp.util.TableUtils
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
@@ -25,7 +27,7 @@ class MovieWithLocalDataRepository @Inject constructor(
         networkState.onNext(NetworkState.LOADING)
 
         endpoint.getUpcoming()
-                .map { MovieAdapter.adapt(it.results) }
+                .map { MovieAdapter.adaptUpcoming(it.results) }
                 .subscribeOn(Schedulers.io())
                 .doOnSuccess {
                     networkState.onNext(NetworkState.LOADED)
@@ -45,6 +47,35 @@ class MovieWithLocalDataRepository @Inject constructor(
 
     }
 
+    override fun getDetails(id: Int): Resource<MovieDetails> {
+        val networkState: Subject<NetworkState> = PublishSubject.create()
+        networkState.onNext(NetworkState.LOADING)
+
+        endpoint.getDetails(id)
+                .subscribeOn(Schedulers.io())
+                .doOnSuccess {
+                    Log.d("Andre", it.toString())
+                    networkState.onNext(NetworkState.LOADED)
+                    insertMoviesDetailsIntoDb(
+                            MovieAdapter.adaptDetails(it),
+                            MovieAdapter.adaptGenre(
+                                    it.genres,
+                                    it.id))
+                }.doOnError {
+                    networkState.onNext(NetworkState.error(it.message))
+                }.subscribe()
+
+        val movieDetails =
+                db.movieDao()
+                        .getDetails()
+                        .subscribeOn(Schedulers.io())
+
+        return Resource(
+                movieDetails,
+                networkState)
+
+    }
+
     private fun insertUpcomingMoviesListIntoDb(
             upcomingMoviesList: List<MovieUpcoming>
     ) {
@@ -54,8 +85,20 @@ class MovieWithLocalDataRepository @Inject constructor(
                 db.movieDao().saveUpcoming(it)
             }
         })
+    }
 
-        TableUtils().setAreaTableLastUpdate()
+    private fun insertMoviesDetailsIntoDb(
+            movieDetails: MovieDetails,
+            genres: List<Genre>
+    ) {
+        db.movieDao().saveDetails(movieDetails)
+        insertMovieGenresIntoDb(genres)
+    }
+
+    private fun insertMovieGenresIntoDb(genres: List<Genre>) {
+        genres.map {
+            db.movieDao().saveDetailsGenre(it)
+        }
     }
 }
 
