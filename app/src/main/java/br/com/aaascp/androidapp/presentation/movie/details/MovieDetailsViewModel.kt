@@ -7,6 +7,7 @@ import br.com.aaascp.androidapp.infra.repository.NetworkState
 import br.com.aaascp.androidapp.infra.repository.ResourceState
 import br.com.aaascp.androidapp.infra.repository.movie.MovieRepository
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails
+import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetailsWithGenre
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -18,7 +19,7 @@ class MovieDetailsViewModel : ViewModel() {
 
     val repository: MovieRepository = MainApplication.component.getMovieRepository()
 
-    val movieDetails = MutableLiveData<MovieDetails>()
+    val movieDetails = MutableLiveData<MovieDetailsWithGenre>()
     val state = MutableLiveData<ResourceState>()
     val networkState = MutableLiveData<NetworkState>()
 
@@ -42,7 +43,7 @@ class MovieDetailsViewModel : ViewModel() {
                 .subscribe()
     }
 
-    private fun observeResource(resource: Flowable<MovieDetails>) {
+    private fun observeResource(resource: Flowable<MovieDetailsWithGenre>) {
         resource.observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { this.movieDetails.value = it }
                 .subscribe()

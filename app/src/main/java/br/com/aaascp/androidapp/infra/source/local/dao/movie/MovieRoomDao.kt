@@ -4,11 +4,9 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
-import br.com.aaascp.androidapp.infra.source.local.entity.Genre
-import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails
-import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming
+import android.arch.persistence.room.Transaction
+import br.com.aaascp.androidapp.infra.source.local.entity.*
 import io.reactivex.Flowable
-import io.reactivex.Single
 
 @Dao
 interface MovieRoomDao : MovieLocalDataSource {
@@ -22,16 +20,13 @@ interface MovieRoomDao : MovieLocalDataSource {
     @Query("DELETE FROM MovieUpcoming")
     override fun removeAllUpcoming()
 
+    @Transaction
     @Query("SELECT * from MovieDetails WHERE id=:id")
-    override fun getDetails(id: Int): Flowable<MovieDetails>
+    override fun getDetails(id: Int): Flowable<MovieDetailsWithGenre>
 
     @Insert(onConflict = REPLACE)
     override fun saveDetails(movieDetails: MovieDetails)
 
     @Insert(onConflict = REPLACE)
     override fun saveDetailsGenre(movieGenre: Genre)
-
-    @Query("SELECT * FROM Genre WHERE movieId=:movieId")
-    fun findGenresForMovie(movieId: Int): Single<List<Genre>>
-
 }

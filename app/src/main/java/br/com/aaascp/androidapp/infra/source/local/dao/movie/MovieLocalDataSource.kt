@@ -1,8 +1,6 @@
 package br.com.aaascp.androidapp.infra.source.local.dao.movie
 
-import br.com.aaascp.androidapp.infra.source.local.entity.Genre
-import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails
-import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming
+import br.com.aaascp.androidapp.infra.source.local.entity.*
 import io.reactivex.Flowable
 
 interface MovieLocalDataSource {
@@ -13,7 +11,7 @@ interface MovieLocalDataSource {
 
     fun removeAllUpcoming()
 
-    fun getDetails(id: Int): Flowable<MovieDetails>
+    fun getDetails(id: Int): Flowable<MovieDetailsWithGenre>
 
     fun saveDetails(movieDetails: MovieDetails)
 

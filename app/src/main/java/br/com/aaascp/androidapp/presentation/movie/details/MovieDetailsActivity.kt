@@ -7,9 +7,12 @@ import br.com.aaascp.androidapp.R
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import br.com.aaascp.androidapp.infra.repository.NetworkState
 import br.com.aaascp.androidapp.infra.repository.ResourceState
+import br.com.aaascp.androidapp.infra.source.local.entity.Genre
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails
+import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetailsWithGenre
 import br.com.aaascp.androidapp.presentation.util.loadImageFromApi
 import kotlinx.android.synthetic.main.activity_movie_details.*
 
@@ -63,19 +66,42 @@ class MoviesDetailsActivity : AppCompatActivity() {
 
                 })
 
+
         model.state.observe(this, Observer {
             //            showState(it)
         })
     }
 
-    private fun bindDetails(movie: MovieDetails) {
+    private fun bindDetails(movieWithGenre: MovieDetailsWithGenre) {
+        val movie = movieWithGenre.movie
+
+        movie?.let {
+            bindMovie(movie)
+        }
+
+        bindGenres(movieWithGenre.genres)
+    }
+
+    private fun bindMovie(movie: MovieDetails) {
         movie.posterPath?.let {
             loadImageFromApi(moviePoster, it)
         }
 
         movieDescription.text = movie.overview
-        movieReleaseDate.text = movie.releaseDate
+        bindReleaseDate(movie.releaseDate)
+
         movieTitle.text = movie.title
+    }
+
+    private fun bindReleaseDate(date: String) {
+        val releaseDateFormat = getString(R.string.upcoming_movie_release_date)
+
+        movieReleaseDate.text =
+                String.format(releaseDateFormat, date)
+    }
+
+    private fun bindGenres(genres: List<Genre>) {
+        movieGenres.text = genres.joinToString(", "){it.name}
     }
 
     private fun bindError() {

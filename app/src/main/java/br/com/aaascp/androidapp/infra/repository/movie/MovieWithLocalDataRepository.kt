@@ -7,8 +7,8 @@ import br.com.aaascp.androidapp.infra.repository.NetworkState
 import br.com.aaascp.androidapp.infra.source.local.AppDatabase
 import br.com.aaascp.androidapp.infra.source.local.entity.Genre
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails
+import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetailsWithGenre
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming
-import br.com.aaascp.androidapp.infra.source.remote.body.movie.MovieDetailsResponseBody
 import br.com.aaascp.androidapp.infra.source.remote.endpoint.MovieEndpoint
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
@@ -47,7 +47,7 @@ class MovieWithLocalDataRepository @Inject constructor(
 
     }
 
-    override fun getDetails(id: Int): Resource<MovieDetails> {
+    override fun getDetails(id: Int): Resource<MovieDetailsWithGenre> {
         val networkState: Subject<NetworkState> = PublishSubject.create()
         networkState.onNext(NetworkState.LOADING)
 
