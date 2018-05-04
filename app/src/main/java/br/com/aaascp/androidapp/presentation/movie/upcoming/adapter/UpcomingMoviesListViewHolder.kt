@@ -1,5 +1,6 @@
 package br.com.aaascp.androidapp.presentation.movie.upcoming.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,11 +35,21 @@ class UpcomingMoviesListViewHolder private constructor(view: View) : ViewHolderB
         }
 
         title.text = item.title
-        releaseDate.text = item.releaseDate
+        bindReleaseDate(
+                root.context.applicationContext,
+                item.releaseDate)
+
         root.setOnClickListener {
             MoviesDetailsActivity.start(
                     it.context,
                     item.id)
         }
+    }
+
+    private fun bindReleaseDate(context: Context, date: String) {
+        val releaseDateFormat =  context.getString(R.string.upcoming_movie_release_date)
+
+        releaseDate.text =
+                String.format(releaseDateFormat, date)
     }
 }

@@ -8,9 +8,9 @@
         <item name="android:textColor">@color/light_grey</item>
     </style>
 
-    <style name="ExpandedTitleTextAppearance" parent="AppTheme">
+    <style name="ToolbarTextAppearance" parent="AppTheme">
         <item name="android:textSize">@dimen/extra_large_text_size</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/red</item>
         <item name="android:textStyle">bold</item>
     </style>
     
