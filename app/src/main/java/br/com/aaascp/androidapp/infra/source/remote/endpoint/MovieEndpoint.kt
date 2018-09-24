@@ -3,6 +3,7 @@ package br.com.aaascp.androidapp.infra.source.remote.endpoint
 import br.com.aaascp.androidapp.infra.source.remote.body.MovieDetailsResponse
 import br.com.aaascp.androidapp.infra.source.remote.body.MovieUpcomingResponse
 import io.reactivex.Single
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -13,11 +14,11 @@ interface MovieEndpoint {
     fun getUpcoming(
             @Query("page") page: Int  = 1,
             @Query("region") region: String = "BR"
-    ): Single<MovieUpcomingResponse>
+    ): Call<MovieUpcomingResponse>
 
     @GET("/3/movie/{id}")
     fun getDetails(
             @Path("id") id: Int,
             @Query("region") language: String = "pt-BR"
-    ): Single<MovieDetailsResponse>
+    ): Call<MovieDetailsResponse>
 }

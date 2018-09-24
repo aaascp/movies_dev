@@ -10,7 +10,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "br.com.aaascp.moviesapp"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -94,5 +94,8 @@ dependencies {
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    kapt'com.jakewharton:butterknife-compiler:8.8.1'
 
 }
