@@ -5,15 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import java.util.List;
 
 import br.com.aaascp.androidapp.R;
-import br.com.aaascp.androidapp.infra.repository.movie.DefaultMovieRespository;
+import br.com.aaascp.androidapp.infra.repository.movie.DefaultMovieRepository;
 import br.com.aaascp.androidapp.infra.source.local.entity.Genre;
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails;
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetailsWithGenre;
@@ -45,11 +45,10 @@ public class MoviesDetailsActivity extends Activity implements MovieDetailsContr
     @BindView(R.id.moviePoster)
     ImageView moviePoster;
 
-//    @BindView(R.id.toolbar)
-//    Toolbar toolbar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private MovieDetailsContract.Presenter presenter;
-
 
     public static void startForMovie(Context context, int movieId) {
 
@@ -70,18 +69,18 @@ public class MoviesDetailsActivity extends Activity implements MovieDetailsContr
         setContentView(R.layout.activity_movie_details);
         ButterKnife.bind(this);
 
-//        toolbar.setNavigationOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        onBackPressed();
-//                    }
-//                });
+        toolbar.setNavigationOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onBackPressed();
+                    }
+                });
 
         new MovieDetailsPresenter(
                 this,
                 this.getMovieIdExtra(),
-                new DefaultMovieRespository(
+                new DefaultMovieRepository(
                         new ServiceGenerator().createService(MovieEndpoint.class)));
     }
 

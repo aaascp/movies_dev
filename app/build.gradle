@@ -54,25 +54,13 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     //Support Libraries
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
     implementation "com.android.support:cardview-v7:${rootProject.ext.supportLibVersion}"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-
-    // ViewModel and LiveData
-    implementation "android.arch.lifecycle:extensions:${rootProject.ext.androidComponentsVersion}"
-    kapt "android.arch.lifecycle:compiler:${rootProject.ext.androidComponentsVersion}"
-
-    // Room
-    implementation "android.arch.persistence.room:runtime:${rootProject.ext.roomVersion}"
-    implementation "android.arch.persistence.room:rxjava2:${rootProject.ext.roomVersion}"
-    kapt "android.arch.persistence.room:compiler:${rootProject.ext.roomVersion}"
-
-    //Pagination
-    implementation "android.arch.paging:runtime:1.0.0-rc1"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
     // Retrofit & OkHttp
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
@@ -80,17 +68,6 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit-mock:${rootProject.ext.retrofitVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:3.8.1"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.ext.retrofitVersion}"
-
-    //Dagger
-    implementation "com.google.dagger:dagger:${rootProject.ext.daggerVersion}"
-    implementation "com.google.dagger:dagger-android:${rootProject.ext.daggerVersion}"
-    implementation "com.google.dagger:dagger-android-support:${rootProject.ext.daggerVersion}"
-    kapt "com.google.dagger:dagger-compiler:${rootProject.ext.daggerVersion}"
-    kapt "com.google.dagger:dagger-android-processor:${rootProject.ext.daggerVersion}"
-
-    //RxAndroid
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
-    implementation "io.reactivex.rxjava2:rxjava:2.1.13"
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'

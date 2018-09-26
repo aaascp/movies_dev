@@ -11,24 +11,26 @@ public class ServiceGenerator {
 
     private static final String BASE_URL = BuildConfig.API_URL;
 
-    private final HttpLoggingInterceptor loggingInterceptor =
-            new HttpLoggingInterceptor()
-                    .setLevel(HttpLoggingInterceptor.Level.BODY);
+    private final Retrofit retrofit;
 
-    private final TokenInterceptor tokenInterceptor = new TokenInterceptor();
+    public ServiceGenerator() {
+        final HttpLoggingInterceptor loggingInterceptor =
+                new HttpLoggingInterceptor()
+                        .setLevel(HttpLoggingInterceptor.Level.BODY);
 
-    private final OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder()
-            .addInterceptor(this.loggingInterceptor)
-            .addInterceptor(this.tokenInterceptor);
+        final TokenInterceptor tokenInterceptor = new TokenInterceptor();
+        final OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder()
+                .addInterceptor(tokenInterceptor)
+                .addInterceptor(loggingInterceptor);
 
-    private final Retrofit.Builder retrofitBuilder =
-            new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .client(this.httpClientBuilder.build())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create());
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(httpClientBuilder.build())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create());
 
-    private final Retrofit retrofit = this.retrofitBuilder.build();
+        this.retrofit = retrofitBuilder.build();
+    }
 
     public <S> S createService(Class<S> serviceClass) {
         return this.retrofit.create(serviceClass);

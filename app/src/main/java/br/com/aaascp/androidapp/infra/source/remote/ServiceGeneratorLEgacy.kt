@@ -15,7 +15,7 @@ object ServiceGeneratorLEgacy {
             HttpLoggingInterceptor()
                     .setLevel(HttpLoggingInterceptor.Level.BODY)
 
-    private val tokenInterceptor = TokenInterceptor()
+    private val tokenInterceptor = TokenInterceptorLegacy()
 
     private val httpClient =
             OkHttpClient.Builder()
