@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import br.com.aaascp.androidapp.Inject;
 import br.com.aaascp.androidapp.R;
 import br.com.aaascp.androidapp.infra.repository.movie.DefaultMovieRepository;
 import br.com.aaascp.androidapp.infra.source.local.entity.Genre;
@@ -19,7 +20,6 @@ import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails;
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetailsWithGenre;
 import br.com.aaascp.androidapp.infra.source.remote.ServiceGenerator;
 import br.com.aaascp.androidapp.infra.source.remote.endpoint.MovieEndpoint;
-import br.com.aaascp.androidapp.presentation.util.ImageUtilsKt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -123,7 +123,7 @@ public class MoviesDetailsActivity extends Activity implements MovieDetailsContr
         }
 
         if (movieDetails.getPosterPath() != null) {
-            ImageUtilsKt.loadImageFromApi(this.moviePoster, movieDetails.getPosterPath(), 500);
+            Inject.provideImageUtils().loadImageFromApi(this.moviePoster, movieDetails.getPosterPath(), 500);
         }
 
         this.movieDescription.setText(movieDetails.getOverview());

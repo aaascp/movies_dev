@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import br.com.aaascp.androidapp.Inject
 import br.com.aaascp.androidapp.R
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming
 import br.com.aaascp.androidapp.presentation.ViewHolderBase
 import br.com.aaascp.androidapp.presentation.movie.details.MoviesDetailsActivity
-import br.com.aaascp.androidapp.presentation.util.loadImageFromApi
 import kotlinx.android.synthetic.main.row_upcoming_movie_item.view.*
 
 class UpcomingMoviesListViewHolder private constructor(view: View) : ViewHolderBase<MovieUpcoming>(view) {
@@ -22,13 +22,15 @@ class UpcomingMoviesListViewHolder private constructor(view: View) : ViewHolderB
         }
     }
 
-    private val root: View = view.root
-    private val image: ImageView = view.image
-    private val title: TextView = view.title
-    private val releaseDate: TextView = view.releaseDate
+    val root: View = view.root
+    val image: ImageView = view.image
+    val title: TextView = view.title
+    val releaseDate: TextView = view.releaseDate
     override fun bind(item: MovieUpcoming) {
+        val imageUtils = Inject.provideImageUtils()
+
         item.posterPath?.let {
-            loadImageFromApi(image, item.posterPath)
+            imageUtils.loadImageFromApi(image, item.posterPath, 500)
         }
         title.text = item.title
         bindReleaseDate(
