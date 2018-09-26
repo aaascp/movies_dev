@@ -1,10 +1,13 @@
 package br.com.aaascp.androidapp.presentation.movie.details;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.aaascp.androidapp.infra.repository.RepositoryCallback;
 import br.com.aaascp.androidapp.infra.repository.movie.MovieRepository;
+import br.com.aaascp.androidapp.infra.source.local.entity.Genre;
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetailsWithGenre;
+import br.com.aaascp.androidapp.presentation.util.ListUtils;
 
 public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
 
@@ -12,7 +15,7 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
     private final int movieId;
     private final MovieRepository movieRepository;
 
-    MovieDetailsPresenter(
+    public MovieDetailsPresenter(
             MovieDetailsContract.View view,
             int movieId,
             MovieRepository movieRepository) {
@@ -35,7 +38,11 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
                 new RepositoryCallback<MovieDetailsWithGenre>() {
                     @Override
                     public void onSuccess(MovieDetailsWithGenre movieDetailsWithGenre) {
-                        view.showMovieDetails(movieDetailsWithGenre);
+                        view.showMovieDetails(movieDetailsWithGenre.getMovie());
+                        view.showMovieGenres(
+                                ListUtils.join(
+                                        getGenresNames(
+                                                movieDetailsWithGenre.getGenres())));
                     }
 
                     @Override
@@ -43,5 +50,15 @@ public class MovieDetailsPresenter implements MovieDetailsContract.Presenter {
                         view.showError();
                     }
                 });
+    }
+
+    private List<String> getGenresNames(List<Genre> genreList) {
+        List<String> genresNames = new ArrayList<>(genreList.size());
+
+        for (Genre genre : genreList) {
+            genresNames.add(genre.getName());
+        }
+
+        return genresNames;
     }
 }

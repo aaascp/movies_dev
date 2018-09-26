@@ -1,7 +1,6 @@
 package br.com.aaascp.androidapp.presentation.movie.details;
 
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails;
-import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetailsWithGenre;
 
 public interface MovieDetailsContract {
 
@@ -10,13 +9,13 @@ public interface MovieDetailsContract {
     }
 
     interface View {
-        void showMovieDetails(MovieDetailsWithGenre movieDetailsWithGenre);
+        void showMovieDetails(MovieDetails movieDetailsWithGenre);
+
+        void showMovieGenres(String genres);
 
         void showError();
 
         void showLoading();
-
-        void bindMovie(MovieDetails movieDetails);
 
         void setPresenter(Presenter presenter);
     }

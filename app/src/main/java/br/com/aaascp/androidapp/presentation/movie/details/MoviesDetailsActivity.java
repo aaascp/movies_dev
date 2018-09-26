@@ -10,14 +10,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import br.com.aaascp.androidapp.Inject;
 import br.com.aaascp.androidapp.R;
 import br.com.aaascp.androidapp.infra.repository.movie.DefaultMovieRepository;
-import br.com.aaascp.androidapp.infra.source.local.entity.Genre;
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails;
-import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetailsWithGenre;
 import br.com.aaascp.androidapp.infra.source.remote.ServiceGenerator;
 import br.com.aaascp.androidapp.infra.source.remote.endpoint.MovieEndpoint;
 import butterknife.BindView;
@@ -92,10 +88,15 @@ public class MoviesDetailsActivity extends Activity implements MovieDetailsContr
     }
 
     @Override
-    public void showMovieDetails(MovieDetailsWithGenre movieDetailsWithGenre) {
+    public void showMovieDetails(MovieDetails movieDetails) {
         this.state.setVisibility(View.GONE);
-        this.bindMovie(movieDetailsWithGenre.getMovie());
-        this.bindGenres(movieDetailsWithGenre.getGenres());
+        this.bindMovie(movieDetails);
+    }
+
+
+    @Override
+    public void showMovieGenres(String genres) {
+        this.movieGenres.setText(genres);
     }
 
     @Override
@@ -117,11 +118,11 @@ public class MoviesDetailsActivity extends Activity implements MovieDetailsContr
     }
 
     @Override
-    public void bindMovie(MovieDetails movieDetails) {
-        if (movieDetails == null) {
-            return;
-        }
+    public void setPresenter(MovieDetailsContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
 
+    private void bindMovie(MovieDetails movieDetails) {
         if (movieDetails.getPosterPath() != null) {
             Inject.provideImageUtils().loadImageFromApi(this.moviePoster, movieDetails.getPosterPath(), 500);
         }
@@ -136,11 +137,6 @@ public class MoviesDetailsActivity extends Activity implements MovieDetailsContr
                         movieDetails.getReleaseDate()));
     }
 
-    @Override
-    public void setPresenter(MovieDetailsContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
     private int getMovieIdExtra() {
         return 210577;
 //        Bundle extras = getIntent().getExtras();
@@ -149,19 +145,5 @@ public class MoviesDetailsActivity extends Activity implements MovieDetailsContr
 //        }
 //
 //        return -1;
-    }
-
-    private void bindGenres(List<Genre> genresList) {
-        this.movieGenres.setText(this.joinGenres(genresList));
-    }
-
-    private String joinGenres(List<Genre> genreList) {
-        String genresJoined = "";
-
-        for (Genre genre : genreList) {
-            genresJoined = genre.getName() + ", ";
-        }
-
-        return genresJoined.substring(0, genresJoined.length() - 2);
     }
 }
