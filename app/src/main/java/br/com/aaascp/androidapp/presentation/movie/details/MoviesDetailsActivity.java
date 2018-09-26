@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 
 public class MoviesDetailsActivity extends Activity implements MovieDetailsContract.View {
 
-    private static final String EXTRA_MOVIE_ID = "EXTRA_MOVIE_ID";
+    public static final String EXTRA_MOVIE_ID = "EXTRA_MOVIE_ID";
 
     @BindView(R.id.state)
     TextView state;
@@ -101,7 +101,7 @@ public class MoviesDetailsActivity extends Activity implements MovieDetailsContr
 
     @Override
     public void showError() {
-        this.state.setVisibility(View.GONE);
+        this.state.setVisibility(View.VISIBLE);
         this.state.setText(
                 this.getString(
                         R.string.item_error
@@ -110,7 +110,7 @@ public class MoviesDetailsActivity extends Activity implements MovieDetailsContr
 
     @Override
     public void showLoading() {
-        this.state.setVisibility(View.GONE);
+        this.state.setVisibility(View.VISIBLE);
         this.state.setText(
                 this.getString(
                         R.string.item_loading

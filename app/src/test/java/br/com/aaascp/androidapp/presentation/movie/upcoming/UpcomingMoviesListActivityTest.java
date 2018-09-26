@@ -1,6 +1,8 @@
 package br.com.aaascp.androidapp.presentation.movie.upcoming;
 
 
+import android.content.Intent;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
 import java.util.Arrays;
@@ -16,10 +19,12 @@ import java.util.List;
 import br.com.aaascp.androidapp.BuildConfig;
 import br.com.aaascp.androidapp.R;
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming;
+import br.com.aaascp.androidapp.presentation.movie.details.MoviesDetailsActivity;
 import br.com.aaascp.androidapp.presentation.movie.upcoming.adapter.UpcomingMoviesListViewHolder;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.verify;
+import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -43,7 +48,7 @@ public class UpcomingMoviesListActivityTest {
     }
 
     @Test
-    public void onStart() throws Exception {
+    public void onStart_startsPresenter() throws Exception {
         activity.onStart();
         verify(presenter).start();
     }
@@ -84,4 +89,39 @@ public class UpcomingMoviesListActivityTest {
                 releaseDate,
                 holder.getReleaseDate().getText().toString());
     }
+
+    @Test
+    public void onMovieClick_startsMovieDetailsActivityForMovieId() {
+        List<MovieUpcoming> movieUpcomingList = Arrays.asList(FIRST_MOVIE, SECOND_MOVIE);
+        activity.showUpcomingMoviesList(movieUpcomingList);
+
+
+        UpcomingMoviesListViewHolder holder =
+                (UpcomingMoviesListViewHolder) activity.upcomingMoviesList
+                        .findViewHolderForAdapterPosition(0);
+
+        holder.getRoot().performClick();
+
+        Intent expectedIntent = new Intent(activity, MoviesDetailsActivity.class);
+        Intent actualIntent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+        assertEquals(expectedIntent.getComponent(), actualIntent.getComponent());
+        assertEquals(
+                FIRST_MOVIE.getId(),
+                actualIntent.getExtras().getInt(MoviesDetailsActivity.EXTRA_MOVIE_ID));
+
+        holder = (UpcomingMoviesListViewHolder) activity.upcomingMoviesList
+                        .findViewHolderForAdapterPosition(1);
+
+        holder.getRoot().performClick();
+
+        expectedIntent = new Intent(activity, MoviesDetailsActivity.class);
+        actualIntent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
+        assertEquals(expectedIntent.getComponent(), actualIntent.getComponent());
+        assertEquals(
+                SECOND_MOVIE.getId(),
+                actualIntent.getExtras().getInt(MoviesDetailsActivity.EXTRA_MOVIE_ID));
+
+    }
+
+
 }

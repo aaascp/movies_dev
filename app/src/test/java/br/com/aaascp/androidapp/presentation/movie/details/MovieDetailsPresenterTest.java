@@ -1,4 +1,4 @@
-package br.com.aaascp.androidapp.presentation.movie.upcoming;
+package br.com.aaascp.androidapp.presentation.movie.details;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,8 +15,6 @@ import br.com.aaascp.androidapp.infra.repository.movie.MovieRepository;
 import br.com.aaascp.androidapp.infra.source.local.entity.Genre;
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetails;
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieDetailsWithGenre;
-import br.com.aaascp.androidapp.presentation.movie.details.MovieDetailsContract;
-import br.com.aaascp.androidapp.presentation.movie.details.MovieDetailsPresenter;
 import br.com.aaascp.androidapp.presentation.util.ListUtils;
 
 import static org.mockito.Mockito.verify;
