@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import kotlinx.android.synthetic.main.row_items_error.view.*
 
 class SingleRowStaticViewAdapter(
         @field:LayoutRes
@@ -25,5 +27,7 @@ class SingleRowStaticViewAdapter(
         return 1
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val message: TextView = itemView.message
+    }
 }

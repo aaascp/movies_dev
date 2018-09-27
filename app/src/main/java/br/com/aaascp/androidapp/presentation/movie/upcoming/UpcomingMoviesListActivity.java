@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 
 import java.util.List;
@@ -58,26 +57,22 @@ public class UpcomingMoviesListActivity extends AppCompatActivity implements Upc
 
     @Override
     public void showUpcomingMoviesList(List<MovieUpcoming> movieUpcomingList) {
-        Log.d("Andre", "showUpcomingMoviesList");
         this.listAdapter.setItems(movieUpcomingList);
         this.upcomingMoviesList.setAdapter(this.listAdapter);
     }
 
     @Override
     public void showError() {
-        Log.d("Andre", "showError");
         this.upcomingMoviesList.setAdapter(this.errorAdapter);
     }
 
     @Override
     public void showLoading() {
-        Log.d("Andre", "showLoading");
         this.upcomingMoviesList.setAdapter(this.loadingAdapter);
     }
 
     @Override
     public void showEmptyList() {
-        Log.d("Andre", "showEmptyList");
         this.upcomingMoviesList.setAdapter(this.emptyAdapter);
     }
 

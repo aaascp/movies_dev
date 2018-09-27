@@ -19,6 +19,7 @@ import java.util.List;
 import br.com.aaascp.androidapp.BuildConfig;
 import br.com.aaascp.androidapp.R;
 import br.com.aaascp.androidapp.infra.source.local.entity.MovieUpcoming;
+import br.com.aaascp.androidapp.presentation.SingleRowStaticViewAdapter;
 import br.com.aaascp.androidapp.presentation.movie.details.MoviesDetailsActivity;
 import br.com.aaascp.androidapp.presentation.movie.upcoming.adapter.UpcomingMoviesListViewHolder;
 
@@ -30,8 +31,19 @@ import static org.robolectric.Shadows.shadowOf;
 @Config(constants = BuildConfig.class)
 public class UpcomingMoviesListActivityTest {
 
-    private static final MovieUpcoming FIRST_MOVIE = new MovieUpcoming(1, "Filme 1", "poster_1", "17/11/1990");
-    private static final MovieUpcoming SECOND_MOVIE = new MovieUpcoming(2, "Filme 2", "poster_2", "27/11/1990");
+    private static final MovieUpcoming FIRST_MOVIE =
+            new MovieUpcoming(
+                    1,
+                    "Filme 1",
+                    "poster_1",
+                    "17/11/1990");
+
+    private static final MovieUpcoming SECOND_MOVIE =
+            new MovieUpcoming(
+                    2,
+                    "Filme 2",
+                    "poster_2",
+                    "27/11/1990");
 
     @Mock
     private UpcomingMoviesContract.Presenter presenter;
@@ -75,7 +87,7 @@ public class UpcomingMoviesListActivityTest {
                 holder.getReleaseDate().getText().toString());
 
         holder = (UpcomingMoviesListViewHolder) activity.upcomingMoviesList
-                        .findViewHolderForAdapterPosition(1);
+                .findViewHolderForAdapterPosition(1);
 
         assertEquals(
                 SECOND_MOVIE.getTitle(),
@@ -110,7 +122,7 @@ public class UpcomingMoviesListActivityTest {
                 actualIntent.getExtras().getInt(MoviesDetailsActivity.EXTRA_MOVIE_ID));
 
         holder = (UpcomingMoviesListViewHolder) activity.upcomingMoviesList
-                        .findViewHolderForAdapterPosition(1);
+                .findViewHolderForAdapterPosition(1);
 
         holder.getRoot().performClick();
 
@@ -123,5 +135,43 @@ public class UpcomingMoviesListActivityTest {
 
     }
 
+    @Test
+    public void showEmptyList_showsEmptyState() {
+        activity.showEmptyList();
+
+        SingleRowStaticViewAdapter.ViewHolder holder =
+                (SingleRowStaticViewAdapter.ViewHolder) activity.upcomingMoviesList
+                        .findViewHolderForAdapterPosition(0);
+
+        assertEquals(
+                activity.getString(R.string.list_empty),
+                holder.getMessage().getText().toString());
+    }
+
+    @Test
+    public void showError_showErrorState() {
+        activity.showError();
+
+        SingleRowStaticViewAdapter.ViewHolder holder =
+                (SingleRowStaticViewAdapter.ViewHolder) activity.upcomingMoviesList
+                        .findViewHolderForAdapterPosition(0);
+
+        assertEquals(
+                activity.getString(R.string.list_error),
+                holder.getMessage().getText().toString());
+    }
+
+    @Test
+    public void showLoading_showsLoadingState() {
+        activity.showLoading();
+
+        SingleRowStaticViewAdapter.ViewHolder holder =
+                (SingleRowStaticViewAdapter.ViewHolder) activity.upcomingMoviesList
+                        .findViewHolderForAdapterPosition(0);
+
+        assertEquals(
+                activity.getString(R.string.list_loading),
+                holder.getMessage().getText().toString());
+    }
 
 }
