@@ -48,7 +48,7 @@ public class MoviesDetailsActivityTest {
     }
 
     @Test
-    public void onCreate_startsWithCorrectExtras() throws Exception {
+    public void onCreate_startsWithCorrectExtras() {
         MoviesDetailsActivity.startForMovie(activity, MOVIE.getId());
         Intent intent = shadowOf(RuntimeEnvironment.application).getNextStartedActivity();
         assertEquals(
@@ -57,13 +57,13 @@ public class MoviesDetailsActivityTest {
     }
 
     @Test
-    public void onStart_startsPresenter() throws Exception {
+    public void onStart_startsPresenter() {
         activity.onStart();
         verify(presenter).start();
     }
 
     @Test
-    public void showMovieDetails_showsCorrectMovies() throws Exception {
+    public void showMovieDetails_showsCorrectMovies() {
         activity.showMovieDetails(MOVIE);
 
         assertEquals(
@@ -89,7 +89,7 @@ public class MoviesDetailsActivityTest {
     }
 
     @Test
-    public void showError_showsErrorMessage() throws Exception {
+    public void showError_showsErrorMessage() {
         activity.showError();
 
         assertEquals(
@@ -102,7 +102,7 @@ public class MoviesDetailsActivityTest {
     }
 
     @Test
-    public void showLoading_showsLoadingMessage() throws Exception {
+    public void showLoading_showsLoadingMessage() {
         activity.showLoading();
 
         assertEquals(
@@ -115,7 +115,7 @@ public class MoviesDetailsActivityTest {
     }
 
     @Test
-    public void showMovieGenres_showsGenresList() throws Exception {
+    public void showMovieGenres_showsGenresList() {
         String genres = "Genre 1, Genre 2";
 
         activity.showMovieGenres(genres);

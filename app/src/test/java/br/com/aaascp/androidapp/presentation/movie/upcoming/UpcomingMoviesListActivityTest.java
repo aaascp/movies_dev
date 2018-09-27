@@ -48,13 +48,13 @@ public class UpcomingMoviesListActivityTest {
     }
 
     @Test
-    public void onStart_startsPresenter() throws Exception {
+    public void onStart_startsPresenter() {
         activity.onStart();
         verify(presenter).start();
     }
 
     @Test
-    public void showUpcomingMoviesList_showsCorrectListOfMovies() throws Exception {
+    public void showUpcomingMoviesList_showsCorrectListOfMovies() {
         List<MovieUpcoming> movieUpcomingList = Arrays.asList(FIRST_MOVIE, SECOND_MOVIE);
         activity.showUpcomingMoviesList(movieUpcomingList);
 
